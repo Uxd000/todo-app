@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/Uxd000/todo-app/issues"
   },
-  "homepage": "https://github.com/Uxd000/todo-app#readme"
+  "homepage": "https://github.com/Uxd000/todo-app#readme",
+  "devDependencies": {
+    "webpack": "^5.104.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
 }
