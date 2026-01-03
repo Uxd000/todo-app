@@ -1,0 +1,28 @@
+function createProject(name){
+    let todos = [];
+
+
+    function addTodo(todo){
+        todos.push(todo);
+    }
+
+    function removeTodo(index){
+        todos.splicr(index,1);
+    }
+
+    function getTodos(){
+        return todos;
+    }
+
+
+    return{
+        name,
+        addTodo,
+        removeTodo,
+        getTodos,
+    };
+
+
+}
+
+export default createProject;
