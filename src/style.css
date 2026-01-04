@@ -12,12 +12,14 @@ body{
 
 }
 
-aside{
-    background-color: rgb(132, 218, 218);
+aside {
+  width: 250px;
+  padding: 1rem;
 }
 
-main{
-    background-color: antiquewhite;
+main {
+  flex: 1;
+  padding: 1rem;
 }
 
 header{
@@ -31,3 +33,67 @@ header{
     background-color: rgba(0,0,0,0.1);
 }
 
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.delete-btn:hover {
+  transform: scale(1.2);
+}
+
+
+.todo-item[data-priority="high"] {
+  border-left: 4px solid red;
+}
+
+.todo-item[data-priority="medium"] {
+  border-left: 4px solid orange;
+}
+
+.todo-item[data-priority="low"] {
+  border-left: 4px solid green;
+}
+
+.layout{
+  display: flex;
+  min-height: calc(100vh - 80px);
+}
+
+.project-item {
+  padding: 0.5rem;
+  margin-bottom: 0.3rem;
+  border-radius: 4px;
+}
+
+.project-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.active-project {
+  background-color: rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+}
+
+.todo-item {
+  background-color: white;
+  padding: 0.6rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}

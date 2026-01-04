@@ -57,7 +57,7 @@ function getCurrentProject(){
     return currentProject;
 }
 
-function addTodoFromCurrentProject(todo){
+function addTodoToCurrentProject(todo){
     if(!currentProject) return;
     currentProject.addTodo(todo);
     storage.save(projects);
@@ -70,6 +70,15 @@ function removeTodoFromCurrentProject(index){
     storage.save(projects);
 }
 
+function toggleTodoCompletion(index) {
+    if (!currentProject) return;
+
+    const todos = currentProject.getTodos();
+    todos[index].toggleCompleted();
+    storage.save(projects);
+}
+
+
 export default{
 
     initialize,
@@ -77,8 +86,8 @@ export default{
     getProjects,
     setCurrentProject,
     getCurrentProject,
-    addTodoFromCurrentProject,
+    addTodoToCurrentProject,
     removeTodoFromCurrentProject,
-    
+    toggleTodoCompletion,
 
 };

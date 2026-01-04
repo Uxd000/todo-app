@@ -1,20 +1,18 @@
-function createTodo(title,description,dueDate,priority){
+function createTodo(title, description, dueDate, priority) {
+  let completed = false;
 
-    let completed= false;
+  function toggleCompleted() {
+    completed = !completed;
+  }
 
-
-
-
-
-
-    return{
-        title,
-        description,
-        dueDate,
-        priority,
-        completed,
-    };
-
+  return {
+    title,
+    description,
+    dueDate,
+    priority,
+    completed,
+    toggleCompleted,
+  };
 }
 
 export default createTodo;

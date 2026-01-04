@@ -7,7 +7,7 @@ function createProject(name){
     }
 
     function removeTodo(index){
-        todos.splicr(index,1);
+        todos.splice(index,1);
     }
 
     function getTodos(){

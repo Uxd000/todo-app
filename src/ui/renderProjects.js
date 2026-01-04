@@ -1,32 +1,31 @@
 import appState from "../data/appState.js";
 import renderTodos from "./renderTodos.js";
 
+const projectList = document.querySelector("#project-list");
 
-const sidebar = document.querySelector("aside");
+function renderProjects() {
+  projectList.innerHTML = "";
 
-function renderProjects(){
-    sidebar.innerHTML = "";
+  const projects = appState.getProjects();
+  const currentProject = appState.getCurrentProject();
 
-    const projects = appState.getProjects();
+  projects.forEach((project) => {
+    const projectItem = document.createElement("div");
+    projectItem.textContent = project.name;
+    projectItem.classList.add("project-item");
 
-    projects.forEach(project => {
-        const projectItems = document.createElement("div");
-        projectItems.textContent=project.name;
+    if (project === currentProject) {
+      projectItem.classList.add("active-project");
+    }
 
-        if(project === appState.getCurrentProject()){
-            projectItems.classList.add("active-project");
-        }
-
-        projectItems.addEventListener("click", () => {
-
-            appState.setCurrentProject(project);
-            renderProjects();
-            renderTodos();
-
-        });
-
-        sidebar.appendChild(projectItems);
+    projectItem.addEventListener("click", () => {
+      appState.setCurrentProject(project);
+      renderProjects();
+      renderTodos();
     });
+
+    projectList.appendChild(projectItem);
+  });
 }
 
 export default renderProjects;
