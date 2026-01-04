@@ -6,9 +6,9 @@ let projects= [];
 let currentProject = null;
 
 function initialize() {
-  const savedProjects = storage.load();
+  const storedProjects = storage.load();
 
-  if (!savedProjects || savedProjects.length === 0) {
+  if (!storedProjects || storedProjects.length === 0) {
     const inbox = createProject("Inbox");
     projects = [inbox];
     currentProject = inbox;
@@ -16,20 +16,23 @@ function initialize() {
     return;
   }
 
-  projects = savedProjects.map(projectData => {
+  projects = storedProjects.map((projectData) => {
     const project = createProject(projectData.name);
 
     const todos = projectData.todos || [];
+    todos.forEach((todoData) => {
+      const todo = createTodo(
+        todoData.title,
+        todoData.description,
+        todoData.dueDate,
+        todoData.priority
+      );
 
-    todos.forEach(todoData => {
-        const todo = createTodo(
-            todoData.title,
-            todoData.description,
-            todoData.dueDate,
-            todoData.priority
-        );
-        todo.completed = todoData.completed;
-        project.addTodo(todo);
+      if (todoData.completed) {
+        todo.toggleCompleted();
+      }
+
+      project.addTodo(todo);
     });
 
     return project;
@@ -37,6 +40,7 @@ function initialize() {
 
   currentProject = projects[0];
 }
+
 
 function addProject(name){
     const project = createProject(name);

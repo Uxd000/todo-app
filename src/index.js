@@ -15,7 +15,7 @@ renderTodos();
 
 
 const todo = createTodo("Persistence works", "Saved forever", "2026-01-20", "high");
-appState.addTodoFromCurrentProject(todo);
+appState.addTodoToCurrentProject(todo);
 
 console.log(appState.getCurrentProject().getTodos());
 

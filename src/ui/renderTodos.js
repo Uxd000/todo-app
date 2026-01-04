@@ -1,44 +1,47 @@
 import appState from "../data/appState";
 
-const main = document.querySelector("main");
-
 function renderTodos() {
-    main.innerHTML = "";
+  const container = document.querySelector("#todo-list");
+  if (!container) return;
 
-    const project = appState.getCurrentProject();
-    if (!project) return;
+  container.innerHTML = "";
 
-    const todos = project.getTodos();
+  const project = appState.getCurrentProject();
+  if (!project) return;
 
-    todos.forEach((todo, index) => {
-        const todoItem = document.createElement("div");
-        todoItem.classList.add("todo-item");
+  const todos = project.getTodos();
 
-        const title = document.createElement("span");
-        title.textContent = todo.title;
+  todos.forEach((todo, index) => {
+    const todoItem = document.createElement("div");
+    todoItem.classList.add("todo-item");
 
-        if (todo.completed) {
-            title.classList.add("completed");
-        }
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = todo.completed;
 
-        title.addEventListener("click", () => {
-            appState.toggleTodoCompletion(index);
-            renderTodos();
-        });
-
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "✕";
-        deleteBtn.classList.add("delete-btn");
-
-        deleteBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            appState.removeTodoFromCurrentProject(index);
-            renderTodos();
-        });
-
-    todoItem.append(title, deleteBtn);
-    main.appendChild(todoItem);
+    checkbox.addEventListener("change", () => {
+      todo.toggleCompleted();
+      renderTodos();
     });
+
+    const title = document.createElement("span");
+    title.textContent = todo.title;
+
+    if (todo.completed) {
+      title.style.textDecoration = "line-through";
+    }
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "✖";
+
+    deleteBtn.addEventListener("click", () => {
+      project.removeTodo(index);
+      renderTodos();
+    });
+
+    todoItem.append(checkbox, title, deleteBtn);
+    container.appendChild(todoItem);
+  });
 }
 
 export default renderTodos;
